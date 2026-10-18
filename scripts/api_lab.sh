@@ -19,7 +19,6 @@ log() {
 
 log "LAB3_START"
 
-log "BASH_OK"
 
 # Creating a cleanup trap for when the script exits.
 
@@ -50,3 +49,5 @@ joker=data/deck_summary.txt
 # Creating status variable
 
 batman=$?
+
+log "BASH_OK"
