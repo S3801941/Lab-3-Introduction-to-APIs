@@ -59,7 +59,7 @@ log "BASH_OK"
 
 # Getting dad joke and saving it to data/dad_joke.json
 
-curl -sS -H 'Accept: application/json' -w "$riddler" -o "$king"
+curl -sS -H 'Accept: application/json' "$riddler" -o "$king"
 
     # Checking HTTPS status code
     if $batman -eq 200; then
