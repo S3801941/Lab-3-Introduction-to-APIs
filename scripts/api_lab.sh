@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 # This bash file is where we will be making cURL requests and the formating them.
 # This script will include setting for a clean fail if it happens. I will also clean up at the very end.
@@ -59,13 +59,14 @@ log "BASH_OK"
 
 # Getting dad joke and saving it to data/dad_joke.json
 
-batman=$(curl -sS -H 'Accept: application/json' -o "$king" -w '%{https_code}' "$riddler")
+batman=$(curl -sS -H 'Accept: application/json' -o "$king" -w '%{http_code}' "$riddler")
 
     # Checking HTTPS status code
-    if ["$batman" -eq 200]; then
+    if [ $batman -eq 200 ]; then
         log "CURL_JOKE_OK"
     else
         log "CURL_JOKE_FAIL"
+        cleanup
     fi
 
 # Extracting Joke ID and Joke from data/dad_joke.json file.
@@ -76,6 +77,7 @@ if jq -r '.id, .joke' "$king" > "$queen"; then
 else
     echo "Failed to Copy joke and ID to data/dad_joke.txt"
     log "JQ_JOKE_FAILED"
+    cleanup
 fi
 
 
