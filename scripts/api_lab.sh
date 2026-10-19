@@ -12,9 +12,12 @@ set -euo pipefail
 long_pause=$'\n\t'
 
 # This function will send logs to logs/lab3.log
+
+alfred="logs/lab3.log"
+
 log() {
     local message=$1
-    echo "message" >> "$SCRIBE"
+    echo "$message" >> "$alfred"
 }
 
 log "LAB3_START"
@@ -50,4 +53,29 @@ joker=data/deck_summary.txt
 
 batman=$?
 
+# All variables created and prerequisets checked. Logging BASH_OK.
+
 log "BASH_OK"
+
+# Getting dad joke and saving it to data/dad_joke.json
+
+curl -sS -H 'Accept: application/json' -w "$riddler" -o "$king"
+
+    # Checking HTTPS status code
+    if $batman -eq 200; then
+        log "CURL_JOKE_OK"
+    else
+        Log "CURL_JOKE_FAIL"
+    fi
+
+# Extracting Joke ID and Joke from data/dad_joke.json file.
+
+if jq -r '.id, .joke' "$king" > "$queen"; then
+    echo "Successfully Copied joke and ID to data/dad_joke.txt"
+    log "JQ_JOKE_OK"
+else
+    echo "Failed to Copy joke and ID to data/dad_joke.txt"
+    log "JQ_JOKE_FAILED"
+fi
+
+
