@@ -51,7 +51,7 @@ joker=data/deck_summary.txt
 
 # Creating status variable
 
-batman=$?
+
 
 # All variables created and prerequisets checked. Logging BASH_OK.
 
@@ -59,13 +59,13 @@ log "BASH_OK"
 
 # Getting dad joke and saving it to data/dad_joke.json
 
-curl -sS -H 'Accept: application/json' "$riddler" -o "$king"
+batman=$(curl -sS -H 'Accept: application/json' -o "$king" -w '%{https_code}' "$riddler")
 
     # Checking HTTPS status code
-    if $batman -eq 200; then
+    if ["$batman" -eq 200]; then
         log "CURL_JOKE_OK"
     else
-        Log "CURL_JOKE_FAIL"
+        log "CURL_JOKE_FAIL"
     fi
 
 # Extracting Joke ID and Joke from data/dad_joke.json file.
